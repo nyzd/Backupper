@@ -1,0 +1,10 @@
+[package]
+name = "backupper"
+version = "0.0.1"
+edition = "2018"
+
+[dependencies]
+structopt = "0.3.22"
+rsa = "0.5.0"
+rand = "0.8.4"
+ftp4 = { version = "4.0.2", features = ["secure"] }
