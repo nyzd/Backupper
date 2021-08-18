@@ -1,5 +1,8 @@
 # Backupper
 
+# TODO
+
+-   [ ] Handle Errors
 
 # Algorythms
 
