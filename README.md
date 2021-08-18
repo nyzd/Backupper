@@ -12,7 +12,7 @@
 
 `cargo build`
 
-# Install with [ install.sh ] script
+# Install with [ install.sh ] script (Only for linux users)
 
 Step 1 :
 
