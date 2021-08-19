@@ -3,6 +3,7 @@
 # TODO
 
 -   [ ] Handle Errors
+-   [ ] Tests
 
 # Algorythms
 
