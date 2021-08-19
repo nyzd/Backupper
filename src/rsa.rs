@@ -16,8 +16,25 @@ pub struct Rsa {
 
 // This impl uses files
 impl Rsa {
-    /// Create a new rsa struct
-    pub fn new(pub_key_file: &PathBuf, priv_key_file: &PathBuf) -> Self {
+    /// Create a new public and private key
+    pub fn new() -> Self {
+        let bits = 2048;
+
+        // Create Private key First
+        let private_key = RsaPrivateKey::new(&mut RNG, bits).expect("failed to generate a private key");
+
+        // And create public key
+        let public_key = RsaPublicKey::from(&private_key);
+
+        // Return private and public key
+        Self {
+            pub_key: public_key,
+            priv_key: private_key,
+        }
+    }
+
+    /// Create a new rsa struct with pub and priv key files
+    pub fn new_with_files(pub_key_file: &PathBuf, priv_key_file: &PathBuf) -> Self {
         // If public key and private key file exists read files
         if pub_key_file.exists() && priv_key_file.exists() {
             let rsa = Self::from_files(pub_key_file, priv_key_file);
@@ -37,21 +54,17 @@ impl Rsa {
 
     /// Create new public and private keys and save to file
     fn to_files(pub_key_file: &PathBuf, priv_key_file: &PathBuf) -> Self {
-        let bits = 2048;
 
-        // Create Private key First
-        let private_key = RsaPrivateKey::new(&mut RNG, bits).expect("failed to generate a key");
-
-        // And create public key
-        let public_key = RsaPublicKey::from(&private_key);
+        // Create RSA public and private keys
+        let rsa = Self::new();
 
         // Right public and private keys to files
-        let _pub_key_file = public_key.write_public_key_pem_file(pub_key_file);
-        let _priv_key_file = private_key.write_pkcs8_pem_file(priv_key_file);
+        let _pub_key_file = rsa.pub_key.write_public_key_pem_file(pub_key_file);
+        let _priv_key_file = rsa.priv_key.write_pkcs8_pem_file(priv_key_file);
 
         Self {
-            pub_key: public_key,
-            priv_key: private_key,
+            pub_key: rsa.pub_key,
+            priv_key: rsa.priv_key,
         }
     }
 
