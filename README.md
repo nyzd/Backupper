@@ -2,8 +2,8 @@
 
 # TODO
 
+-   [x] Tests (alpha)
 -   [ ] Handle Errors
--   [ ] Tests
 
 # Algorythms
 
