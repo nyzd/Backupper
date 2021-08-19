@@ -1,7 +1,7 @@
 mod cli;
 use cli::*;
 mod rsa;
-use crate::rsa::*;
+pub use crate::rsa::*;
 mod ftp;
 use ftp::*;
 use std::io::prelude::*;
@@ -11,6 +11,8 @@ use std::{
     path::PathBuf,
     str,
 };
+mod test;
+pub use test::*;
 
 // TODO: handle Result
 /// Get file buffer
@@ -42,7 +44,7 @@ fn main() {
             // Start Encrypt file
             // Create a new Rsa struct for encrypt
             // with RSA algo
-            let rsa = Rsa::new(&enc.pub_key_file, &enc.priv_key_file);
+            let rsa = Rsa::new_with_files(&enc.pub_key_file, &enc.priv_key_file);
 
             // Read file to bytes
             let file = file_to_bytes(&enc.file);
@@ -56,7 +58,7 @@ fn main() {
         Subcommand::Decrypt(dec) => {
             // Start Decrypt file
             // Create a new rsa struct
-            let rsa = Rsa::new(&dec.pub_key_file, &dec.priv_key_file);
+            let rsa = Rsa::new_with_files(&dec.pub_key_file, &dec.priv_key_file);
 
             // Read file to byte
             let file = file_to_bytes(&dec.enc_file);
@@ -73,7 +75,7 @@ fn main() {
             if up.encrypt {
                 // First encrypt file and upload to ftp server
                 // Create a new RSA struct
-                let rsa = Rsa::new(&up.pub_key_file, &up.priv_key_file);
+                let rsa = Rsa::new_with_files(&up.pub_key_file, &up.priv_key_file);
 
                 // File to byte
                 let file_bytes = file_to_bytes(&up.file);
@@ -115,7 +117,7 @@ fn main() {
 
                 // Decrypt file
                 // Start create a RSA Struct
-                let rsa = Rsa::new(&dwn.pub_key_file, &dwn.priv_key_file);
+                let rsa = Rsa::new_with_files(&dwn.pub_key_file, &dwn.priv_key_file);
 
                 // Start decrypt file
                 let decrypted = rsa.decrypt(&file);
