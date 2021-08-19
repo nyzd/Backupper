@@ -7,6 +7,7 @@
 # Algorythms
 
 -   [x] RSA
+-   [ ] AES
 
 # Build project
 
