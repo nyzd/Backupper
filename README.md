@@ -4,7 +4,6 @@
 
 -   [x] Tests (alpha)
 -   [ ] Handle Errors
--   [ ] Clean Code
 
 # Algorythms
 
