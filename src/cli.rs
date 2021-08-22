@@ -1,3 +1,6 @@
+/**
+ * Backupper CLI
+ */
 pub use structopt::StructOpt;
 
 #[derive(StructOpt)]
@@ -76,6 +79,7 @@ pub struct DecryptCmd {
     pub out: std::path::PathBuf,
 }
 
+// TODO: -e flag Dont works
 #[derive(Debug, PartialEq, StructOpt)]
 pub struct UploadCmd {
     #[structopt(
@@ -96,7 +100,7 @@ pub struct UploadCmd {
     #[structopt(name = "Password", short = "p", long = "password", required(true))]
     pub password: String,
 
-    #[structopt(name = "Encrypt file", short = "e", long = "encrypt")]
+    #[structopt(name = "encrypt", short = "e", long = "encrypt")]
     pub encrypt: bool,
 
     #[structopt(parse(from_os_str), long = "public", required_if("encrypt", "true"))]
@@ -105,7 +109,6 @@ pub struct UploadCmd {
     #[structopt(parse(from_os_str), long = "private", required_if("encrypt", "true"))]
     pub priv_key_file: std::path::PathBuf,
 }
-
 
 #[derive(Debug, PartialEq, StructOpt)]
 pub struct DownloadCmd {
@@ -136,7 +139,12 @@ pub struct DownloadCmd {
     )]
     pub out: std::path::PathBuf,
 
-    #[structopt(name = "Encrypted file", short = "e", long = "encrypt", help = "If file encrypted use this flag")]
+    #[structopt(
+        name = "encrypted",
+        short = "e",
+        long = "encrypt",
+        help = "If file encrypted use this flag"
+    )]
     pub encrypted: bool,
 
     #[structopt(parse(from_os_str), long = "public", required_if("encrypted", "true"))]
@@ -144,5 +152,4 @@ pub struct DownloadCmd {
 
     #[structopt(parse(from_os_str), long = "private", required_if("encrypted", "true"))]
     pub priv_key_file: std::path::PathBuf,
-
 }

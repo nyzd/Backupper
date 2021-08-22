@@ -59,6 +59,9 @@ impl<'a> FtpClient<'a> {
         }
 
         // Get file cursor
-        self.ftp.simple_retr(&filename).unwrap().into_inner()
+        let file = self.ftp.simple_retr(&filename).unwrap().into_inner();
+        println!("File Downloaded from server.");
+
+        file
     }
 }
