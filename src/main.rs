@@ -1,19 +1,17 @@
+// Mods
 mod cli;
-pub use cli::*;
-
-mod rsa;
-pub use crate::rsa::*;
-
-mod ftp;
-use ftp::*;
-
 mod command;
-pub use command::*;
-
+mod ftp;
+mod rsa;
 mod test;
-pub use test::*;
-
 mod utils;
+
+// Uses
+pub use crate::rsa::*;
+pub use cli::*;
+pub use command::*;
+use ftp::*;
+pub use test::*;
 pub use utils::*;
 
 fn main() {
