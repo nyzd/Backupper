@@ -1,6 +1,5 @@
 use super::{Cli, FtpClient, FtpFile, Rsa, Subcommand};
 use crate::utils::*;
-use sha2::{Digest, Sha256};
 use structopt::StructOpt;
 
 /// Command
