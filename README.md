@@ -2,8 +2,7 @@
 
 # TODO
 
--   [x] Tests (alpha)
--   [ ] Handle Errors
+[TODO list](https://flossy-lemming-f7e.notion.site/Backupper-8d476a7a7bc94352b0009ad1a7ee0a1b)
 
 # Algorythms
 
