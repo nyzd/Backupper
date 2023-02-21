@@ -1,6 +1,7 @@
 # Backupper
+Backup with encryption
 
-# Encryption Algorithms
+# Supported encryption Algorithms
 
 -   [x] RSA
 -   [ ] AES
