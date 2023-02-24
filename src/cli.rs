@@ -15,6 +15,7 @@ pub enum Subcommand {
     Decrypt(DecryptCmd),
     Upload(UploadCmd),
     Download(DownloadCmd),
+    Watch(WatchCmd),
 }
 
 // RSA sub command
@@ -151,5 +152,37 @@ pub struct DownloadCmd {
     pub pub_key_file: std::path::PathBuf,
 
     #[structopt(parse(from_os_str), long = "private", required_if("encrypted", "true"))]
+    pub priv_key_file: std::path::PathBuf,
+}
+
+
+// TODO: -e flag Dont works
+#[derive(Debug, PartialEq, StructOpt)]
+pub struct WatchCmd {
+    #[structopt(
+        name = "dir to watch",
+        parse(from_os_str),
+        short = "d",
+        long = "dir",
+        required(true)
+    )]
+    pub dir: std::path::PathBuf,
+
+    #[structopt(name = "Server address", short = "s", long = "server", required(true))]
+    pub server_addr: String,
+
+    #[structopt(name = "Username", short = "u", long = "username", required(true))]
+    pub username: String,
+
+    #[structopt(name = "Password", short = "p", long = "password", required(true))]
+    pub password: String,
+
+    #[structopt(name = "encrypt", short = "e", long = "encrypt")]
+    pub encrypt: bool,
+
+    #[structopt(parse(from_os_str), long = "public", required_if("encrypt", "true"))]
+    pub pub_key_file: std::path::PathBuf,
+
+    #[structopt(parse(from_os_str), long = "private", required_if("encrypt", "true"))]
     pub priv_key_file: std::path::PathBuf,
 }

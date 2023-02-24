@@ -10,3 +10,5 @@ rand = "0.8.4"
 ftp4 = { version = "4.0.2", features = ["secure"] }
 sha2 = "0.9.5"
 hex = "0.4.3"
+notify = "5.1.0"
+notify-debouncer-mini = { version = "0.2.0" }

@@ -6,16 +6,15 @@ use std::{
     path::PathBuf,
 };
 
-// TODO: handle Result
 /// Get file buffer
-pub fn file_to_bytes(file_path: &PathBuf) -> Vec<u8> {
-    let o_file = File::open(file_path).unwrap();
+pub fn file_to_bytes(file_path: &PathBuf) -> std::io::Result<Vec<u8>> {
+    let o_file = File::open(file_path)?;
     let mut reader = BufReader::new(o_file);
     let mut buffer = Vec::new();
 
-    reader.read_to_end(&mut buffer).unwrap();
+    reader.read_to_end(&mut buffer)?;
 
-    buffer
+    Ok(buffer)
 }
 
 /// Bytes to file

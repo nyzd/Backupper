@@ -19,9 +19,10 @@ impl Rsa {
     /// Create a new public and private key
     pub fn new() -> Self {
         let bits = 2048;
+        let mut rng = RNG;
 
         // Create Private key First
-        let private_key = RsaPrivateKey::new(&mut RNG, bits).expect("failed to generate a private key");
+        let private_key = RsaPrivateKey::new(&mut rng, bits).expect("failed to generate a private key");
 
         // And create public key
         let public_key = RsaPublicKey::from(&private_key);
@@ -83,8 +84,9 @@ impl Rsa {
     /// Encrypt
     pub fn encrypt(&self, data: &[u8]) -> Vec<u8> {
         let padding = PaddingScheme::new_pkcs1v15_encrypt();
+        let mut rng = RNG;
 
-        let encrypted = self.pub_key.encrypt(&mut RNG, padding, data).unwrap();
+        let encrypted = self.pub_key.encrypt(&mut rng, padding, data).unwrap();
 
         encrypted
     }
